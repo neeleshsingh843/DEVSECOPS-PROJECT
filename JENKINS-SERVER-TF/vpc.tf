@@ -1,8 +1,19 @@
+locals {
+  org = "neelesh"
+  project = "DEVSECOPS"
+  env = var.env
+}
+
+
 #---------------- VPC CREATION -----------------
 resource "aws_vpc" "VPC" {
     cidr_block =  var.vpc_cidr
+    instance_tenancy = "default"
+    enable_dns_hostnames = true
+    enable_dns_support = true
     tags = {
-        Name = "DEVSECOPS-JEN-VPC"
+        Name = "${local.org}-${local.project}-${local.env}-VPC"
+        Env = "${local.env} "
     }
   
 }
@@ -10,17 +21,22 @@ resource "aws_vpc" "VPC" {
 resource "aws_internet_gateway" "IGW" {
     vpc_id = aws_vpc.VPC.id
     tags ={
-        Name = "DEVSECOPS-IGW"
+        Name = "${local.org}-${local.project}-${local.env}-IGW"
+        env = var.env
     }
+    depends_on = [ aws_vpc.VPC ]
 }
 #---------------- SUBNET CREATION -----------------
-resource "aws_subnet" "SUBNET" {
+resource "aws_subnet" "PUBLIC-SUBNET" {
+    count =  var.pub-subnet-count
     vpc_id = aws_vpc.VPC.id
-    cidr_block = var.subnet_cidr
-    availability_zone = "ap-south-1a"
+    cidr_block = element(var.pub_subnet_cidr, count.index)
+    availability_zone = element(var.pub-availability-zone, count.index)
    tags = {
-        Name = "DEVSECOPS-SUBNET"
+        Name = "${local.org}-${local.project}-${local.env}-PUBLIC-SUBNET-${count.index +1}"
+        env = var.env
    }
+   depends_on = [ aws_vpc.VPC ]
 }
 #---------------- ROUTE TABLE CREATION -----------------
 resource "aws_route_table"  "RT" {
@@ -30,20 +46,23 @@ resource "aws_route_table"  "RT" {
             gateway_id = aws_internet_gateway.IGW.id
             }
     tags = {
-        Name = "DEVSECOPS-RT"
+        Name = "${local.org}-${local.project}-${local.env}-pub-RT"
+        env = var.env
     }
-  
+   depends_on = [ aws_vpc.VPC ]
 }
 #---------------- ROUTE TABLE ASSOCIATION -----------------
 resource "aws_route_table_association" "RTA" {
-    subnet_id = aws_subnet.SUBNET.id
+    count = 4
+    subnet_id = aws_subnet.PUBLIC-SUBNET[count.index].id
     route_table_id = aws_route_table.RT.id
+    depends_on = [ aws_vpc.VPC, aws_subnet.PUBLIC-SUBNET ]
 }
 
 #---------------- SECURITY GROUP CREATION -----------------
 resource "aws_security_group" "SG" {
     vpc_id = aws_vpc.VPC.id
-    name = "DEVSECOPS-SG"
+    name = "${local.org}-${local.project}-${local.env}-SG"
     dynamic "ingress"  {
         for_each = var.ingress_ports 
         content {
@@ -62,7 +81,7 @@ resource "aws_security_group" "SG" {
             cidr_blocks = ["0.0.0.0/0"]
         }
     tags = {
-        Name = "DEVSECOPS-SG"
+        Name = "${local.org}-${local.project}-${local.env}-SG"
 
     }
 
