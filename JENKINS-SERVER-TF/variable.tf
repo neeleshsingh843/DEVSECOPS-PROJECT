@@ -12,18 +12,18 @@ variable "subnet_cidr" {
   
 }
 
-variable "ingress_ports"{
+variable "ingress_ports" {
    description = "List of ports to allow inbound traffic"
    type = list(number)
    default = [22,443,80,8080,9000]   
 }
 
 variable "instance_type" {
-  type = "string"
+  type = string
   default = "t2.micro"
 }
 
 variable "key-name" {
-  type = "string"
+  type = string
   default = "pilot"
 }

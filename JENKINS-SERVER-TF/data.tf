@@ -12,6 +12,3 @@ data "aws_ami" "AMI" {
   
 }
 
-data "aws_s3_bucket" "s3bucket" {
-     bucket = "devsecops-s3-bucket843"  
-}

@@ -5,8 +5,8 @@ provider "aws" {
     
 terraform {
 backend "s3" {
-    bucket = data.aws_s3_bucket.s3bucket.bucket
-    key    = "jenkins-server/terraform.tfstate"
+    bucket = "devsecops-s3-bucket843"
+    key    = "devsecops-s3-bucket843/terraform.tfstate"
     region = "ap-south-1"
     encrypt = true
   }

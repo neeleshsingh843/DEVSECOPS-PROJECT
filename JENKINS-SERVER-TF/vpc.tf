@@ -1,6 +1,6 @@
 #---------------- VPC CREATION -----------------
 resource "aws_vpc" "VPC" {
-    cidr_block =  "var.vpc_cidr"
+    cidr_block =  var.vpc_cidr
     tags = {
         Name = "DEVSECOPS-JEN-VPC"
     }
@@ -8,7 +8,7 @@ resource "aws_vpc" "VPC" {
 }
 #---------------- INTERNET GATEWAY CREATION -----------------
 resource "aws_internet_gateway" "IGW" {
-    vpc_id = aws_vpc_id.VPC.id
+    vpc_id = aws_vpc.VPC.id
     tags ={
         Name = "DEVSECOPS-IGW"
     }
@@ -16,7 +16,7 @@ resource "aws_internet_gateway" "IGW" {
 #---------------- SUBNET CREATION -----------------
 resource "aws_subnet" "SUBNET" {
     vpc_id = aws_vpc.VPC.id
-    cidr_block = "var.subnet_cidr"
+    cidr_block = var.subnet_cidr
     availability_zone = "ap-south-1a"
    tags = {
         Name = "DEVSECOPS-SUBNET"
@@ -44,20 +44,23 @@ resource "aws_route_table_association" "RTA" {
 resource "aws_security_group" "SG" {
     vpc_id = aws_vpc.VPC.id
     name = "DEVSECOPS-SG"
-    ingress = [
-        for port in var.ingress_ports : {
-            description   = "Allow inbound traffic on port ${port} "
-            from_port = port
-            to_port   = port
+    dynamic "ingress"  {
+        for_each = var.ingress_ports 
+        content {
+            description   = "Allow inbound traffic on port ${ingress.value} "
+            from_port = ingress.value
+            to_port   = ingress.value
             protocol  = "tcp"
             cidr_blocks = ["0.0.0.0/0"]
-        }]
-        egress = {
+           
+        }
+    }
+        egress {
             from_port   = 0
             to_port     = 0
             protocol    = "-1"
             cidr_blocks = ["0.0.0.0/0"]
-}
+        }
     tags = {
         Name = "DEVSECOPS-SG"
 
