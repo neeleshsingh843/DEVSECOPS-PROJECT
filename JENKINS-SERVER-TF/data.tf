@@ -11,3 +11,7 @@ data "aws_ami" "AMI" {
     owners = ["137112412989"] # Amazon
   
 }
+
+data "aws_s3_bucket" "s3bucket" {
+     bucket = "devsecops-s3-bucket843"  
+}

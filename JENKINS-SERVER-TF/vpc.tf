@@ -2,7 +2,7 @@
 resource "aws_vpc" "VPC" {
     cidr_block =  "var.vpc_cidr"
     tags = {
-        Name = "VPC"
+        Name = "DEVSECOPS-JEN-VPC"
     }
   
 }
@@ -10,7 +10,7 @@ resource "aws_vpc" "VPC" {
 resource "aws_internet_gateway" "IGW" {
     vpc_id = aws_vpc_id.VPC.id
     tags ={
-        Name = "IGW"
+        Name = "DEVSECOPS-IGW"
     }
 }
 #---------------- SUBNET CREATION -----------------
@@ -19,7 +19,7 @@ resource "aws_subnet" "SUBNET" {
     cidr_block = "var.subnet_cidr"
     availability_zone = "ap-south-1a"
    tags = {
-        Name = "SUBNET"
+        Name = "DEVSECOPS-SUBNET"
    }
 }
 #---------------- ROUTE TABLE CREATION -----------------
@@ -30,7 +30,7 @@ resource "aws_route_table"  "RT" {
             gateway_id = aws_internet_gateway.IGW.id
             }
     tags = {
-        Name = "RT"
+        Name = "DEVSECOPS-RT"
     }
   
 }
