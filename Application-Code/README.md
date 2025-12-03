@@ -1,119 +1,95 @@
-# 🎬 Netflix Clone - DevSecOps Project
-[![LinkedIn](https://img.shields.io/badge/Connect%20with%20me%20on-LinkedIn-blue.svg)](https://www.linkedin.com/in/aman-devops/)
-[![Discord](https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/invite/jdzF8kTtw2)
-[![Medium](https://img.shields.io/badge/Medium-12100E?style=for-the-badge&logo=medium&logoColor=white)](https://medium.com/@amanpathakdevops)
-[![GitHub](https://img.shields.io/github/stars/AmanPathak-DevOps.svg?style=social)](https://github.com/AmanPathak-DevOps)
-[![AWS](https://img.shields.io/badge/AWS-%F0%9F%9B%A1-orange)](https://aws.amazon.com)
-[![Terraform](https://img.shields.io/badge/Terraform-%E2%9C%A8-lightgrey)](https://www.terraform.io)
+<div align="center">
+  <a href="http://netflix-clone-with-tmdb-using-react-mui.vercel.app/">
+    <img src="./public/assets/netflix-logo.png" alt="Logo" width="100" height="32">
+  </a>
 
-![Architecture Diagram](assets/arch-diag.gif)
+  <h3 align="center">Netflix Clone</h3>
 
+  <p align="center">
+    <a href="https://netflix-clone-react-typescript.vercel.app/">View Demo</a>
+    ·
+    <a href="https://github.com/crazy-man22/netflix-clone-react-typescript/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/crazy-man22/netflix-clone-react-typescript/issues">Request Feature</a>
+  </p>
+</div>
 
-A **complete end-to-end DevSecOps project** showcasing how to automate, secure, and monitor infrastructure and applications using modern tools — from **Terraform to Kubernetes**, **Jenkins to Trivy**, and everything in between.  
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#prerequests">Prerequests</a>
+    </li>
+    <li>
+      <a href="#which-features-this-project-deals-with">Which features this project deals with</a>
+    </li>
+    <li><a href="#third-party-libraries-used-except-for-react-and-rtk">Third Party libraries used except for React and RTK</a></li>
+    <li>
+      <a href="#contact">Contact</a>
+    </li>
+  </ol>
+</details>
 
-Built to demonstrate **real-world DevSecOps workflows** for CI/CD, cloud automation, security integration, and observability — all in one Netflix-themed application. 🍿  
+<br />
 
----
+<div align="center">
+  <img src="./public/assets/home-page.png" alt="Logo" width="100%" height="100%">
+  <p align="center">Home Page</p>
+  <img src="./public/assets/mini-portal.png" alt="Logo" width="100%" height="100%">
+  <p align="center">Mini Portal</p>
+  <img src="./public/assets/detail-modal.png" alt="Logo" width="100%" height="100%">
+  <p align="center">Detail Modal</p>
+  <img src="./public/assets/grid-genre.png" alt="Logo" width="100%" height="100%">
+  <p align="center">Grid Genre Page</p>
+  <img src="./public/assets/watch.png" alt="Logo" width="100%" height="100%">
+  <p align="center">Watch Page with customer contol bar</p>
+</div>
 
-## 🚀 Project Overview
+## Prerequests
 
-This project simulates a real enterprise-grade setup where a **React-based Netflix Clone** is deployed and managed through a **secure, automated DevOps pipeline**.
+- Create an account if you don't have on [TMDB](https://www.themoviedb.org/).
+  Because I use its free API to consume movie/tv data.
+- And then follow the [documentation](https://developers.themoviedb.org/3/getting-started/introduction) to create API Key
+- Finally, if you use v3 of TMDB API, create a file named `.env`, and copy and paste the content of `.env.example`.
+  And then paste the API Key you just created.
 
-### 🌐 Key Features
-- **Infrastructure as Code** with Terraform (AWS provisioning)
-- **State management** using Terraform Cloud  
-- **CI/CD automation** with GitHub Actions and Jenkins  
-- **Security Scanning** with Trivy & OWASP Dependency Check  
-- **Containerization** with Docker  
-- **Kubernetes Deployment** (unmanaged cluster setup)  
-- **Monitoring Stack** for Jenkins, Kubernetes, and the app itself  
+## Which features this project deal with
 
----
+- How to create and use [Custom Hooks](https://reactjs.org/docs/hooks-custom.html)
+- How to use [Context](https://reactjs.org/docs/context.html) and its provider
+- How to use lazy and Suspense for [Code-Splitting](https://reactjs.org/docs/code-splitting.html)
+- How to use a new [lazy](https://reactrouter.com/en/main/route/lazy) feature of react-router to reduce bundle size.
+- How to use data [loader](https://reactrouter.com/en/main/route/loader) of react-router, and how to use redux dispatch in the loader to fetch data before rendering component.
+- How to use [Portal](https://reactjs.org/docs/portals.html)
+- How to use [Fowarding Refs](https://reactjs.org/docs/forwarding-refs.html) to make components reusuable
+- How to create and use [HOC](https://reactjs.org/docs/higher-order-components.html)
+- How to customize default theme of [MUI](https://mui.com/)
+- How to use [RTK](https://redux-toolkit.js.org/introduction/getting-started)
+- How to use [RTK Query](https://redux-toolkit.js.org/rtk-query/overview)
+- How to customize default classname of [MUI](https://mui.com/material-ui/experimental-api/classname-generator)
+- Infinite Scrolling(using [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API))
+- How to make awesome carousel using [slick-carousel](https://react-slick.neostack.com)
 
-## 🧩 Directory Structure
-```bash
-.
-├── Application-Code        # Frontend Netflix Clone app built with React + Vite
-│   ├── Dockerfile           # Docker image build instructions
-│   ├── package.json         # Dependencies and scripts
-│   ├── src/                 # Main source code
-│   └── public/              # Static assets
-│
-├── Jenkins
-│   └── Jenkinsfile          # CI/CD pipeline configuration (build → test → deploy)
-│
-├── Kubernetes
-│   ├── deployment.yml       # App deployment manifest
-│   └── service.yml          # K8s service exposure
-│
-└── Terraform
-    ├── main.tf              # AWS resource definitions
-    ├── backend.tf           # Terraform Cloud backend configuration
-    ├── iam.tf               # IAM roles and policies
-    ├── vpc.tf               # Network setup
-    ├── variables.tf         # Input variables
-    ├── dev.auto.tfvars      # Environment variables
-    └── gather.tf            # Data sources and dependencies
+## Third Party libraries used except for React and RTK
+
+- [react-router-dom@v6.9](https://reactrouter.com/en/main)
+- [MUI(Material UI)](https://mui.com/)
+- [framer-motion](https://www.framer.com/docs/)
+- [video.js](https://videojs.com)
+- [react-slick](https://react-slick.neostack.com/)
+
+## Install with Docker
+
+```sh
+docker build --build-arg TMDB_V3_API_KEY=your_api_key_here -t netflix-clone .
+
+docker run --name netflix-clone-website --rm -d -p 80:80 netflix-clone
 ```
 
-## 🛠️ Tech Stack
+## Todo
 
-| Category | Tools / Technologies |
-|-----------|----------------------|
-| **Infrastructure** | Terraform, AWS EC2, Terraform Cloud |
-| **CI/CD** | Jenkins, GitHub Actions |
-| **Security** | Trivy, SonarQube, OWASP Dependency Check |
-| **Containerization** | Docker |
-| **Orchestration** | Kubernetes (Unmanaged Cluster) |
-| **Monitoring** | Node Exporter, Prometheus, Kube State Metrics |
-| **Frontend** | React, Vite, TMDB API |
-
----
-
-## 🎯 Objectives
-
-1. Automate the entire infrastructure and application deployment lifecycle  
-2. Integrate security and quality checks early in the pipeline  
-3. Establish a fully observable, monitored system for reliability  
-4. Showcase end-to-end DevSecOps workflow — ideal for portfolio and interviews  
-
----
-
-## 📽️ How to do this Project?
-
-> This project is documented through a **5-Part YouTube Series**, each building upon the previous one.
-
-| Part | Title | Description |
-|------|--------|-------------|
-| 🧩 **Part 1** | *Terraform + GitHub Actions + AWS Setup* | Infrastructure setup & automation |
-| ⚙️ **Part 2** | *Jenkins, Docker, SonarQube, Trivy Setup* | Core CI/CD pipeline foundations |
-| 🧠 **Part 3** | *SonarQube + Trivy + TMDB + Pipeline Run* | Running secure pipelines |
-| ☸️ **Part 4** | *Kubernetes Cluster Setup + Deployment* | Full app deployment in K8s |
-| 📊 **Part 5** | *Monitoring Setup* | End-to-end observability |
-
-📺 **Watch here:** [YT Playlist Link](https://youtube.com/playlist?list=PLyJzBek6WsDpKcOxL-F8rAl7FgliN9x6M&si=toDUa6Qx05LYHtbu)  
-🧾 **Read on Medium:** [Medium Blog Series Link](https://blog.stackademic.com/building-a-complete-devsecops-project-part-1-automating-aws-infrastructure-with-terraform-cloud-a51e98b95783)
-
----
-
-## 🔔 Bonus Tip
-
-If you’re following along, don’t forget to:
-- 🎥 **Watch the video version** for step-by-step guidance  
-- 💼 **Tag [@Aman Pathak](https://www.linkedin.com/in/aman-devops/)** on LinkedIn when you post your progress — showcasing your DevOps achievements helps you grow professionally!
-
----
-
-## 🧑‍💻 Author
-
-**Connect with Me**  
-DevOps & Cloud Engineer 
-🔗 [LinkedIn](https://www.linkedin.com/in/aman-devops/) • [YouTube](https://www.youtube.com/@aman-pathak) • [Medium](https://medium.com/@amanpathakdevops)
-
-## Contributing
-We welcome contributions! If you have ideas for enhancements or find any issues, please open a pull request or file an issue.
-
-## License
-This project is licensed under the [MIT License](LICENSE).
-
-Happy Coding! 🚀
+- Make the animation of video card portal more similar to Netflix.
+- Improve performance. I am using `context` and `provider` but all components subscribed to the context's value are re-rendered. These re-renders happen even if the part of the value is not used in render of the component. there are [several ways](https://blog.axlight.com/posts/4-options-to-prevent-extra-rerenders-with-react-context/) to prevent the re-renders from these behaviours. In addition to them, there may be several performance issues.
+- Replace bundler([Vite](https://vitejs.dev/guide)) with [Turbopack](https://turbo.build/pack/docs/why-turbopack). Turbopack is introduced in Next.js conf recently. It's very fast but it's nor ready to use right now. it just support Next.js, and they plan to support all others as soon as possible. so if it's ready to use, replace [Vite](https://vitejs.dev/guide) with [Turbopack](https://turbo.build/pack/docs/why-turbopack).
+- Add accessibilities for better UX.
+- Add Tests.
